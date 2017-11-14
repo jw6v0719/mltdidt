@@ -24,12 +24,20 @@ public class Main {
         }
         root.setApproved(pos);
         root.setDennied(neg);
-
+        root.setClassLabel();
         for(int j=0;j<dr.getAttributes().length;j++){
             aIndice.add(j);
             j++;
         }
         new BuildTree(dataset,rowIndice,dr.getAttributes(),root);
         root.traverse(1);
+        System.out.println("############Verify Start########");
+        Accuracy accu=new Accuracy(root,"gene_expression_test.csv");
+
+
+//        System.out.println("#################Pruning start#############################");
+//        PostPrune pp=new PostPrune(root);
+//        root.traverse(1);
+
     }
 }

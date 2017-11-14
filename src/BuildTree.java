@@ -31,49 +31,56 @@ public class BuildTree {
         subDataset=new Double[rowIndices.size()][datasets[0].length];
         fetchData(rowIndices);
         for(int i=0;i<attributes.length-1;i++){
-            //if (this.AIndices.contains(i)) {
                 calculateGain(i);
-            //}
         }
         System.out.println("Attribute: "+attributes[bestAttrinute]+" condition: "+meanValue);
         split();
         node.setAttribute(attributes[bestAttrinute]);
         node.setCondition(meanValue);
-//        node.setDennied(totalNeg);
-//        node.setApproved(totalPos);
-        //this.AIndices.remove(bestAttrinute);
+        node.setAttributeIndex(bestAttrinute);
+
+
+        TreeNode leftChild=new TreeNode();
+        node.setLeftNode(leftChild);
+        leftChild.setParentNode(node);
         if(checkSplit(leftTreerowIndices)){
-            TreeNode leftChild=new TreeNode();
-            node.setLeftNode(leftChild);
             leftChild.setApproved(lApproved);
             leftChild.setDennied(lDennied);
+            leftChild.setClassLabel();
             new BuildTree(datasets,leftTreerowIndices,attributes, leftChild);
 
         }else{
-            TreeNode leftChild=new TreeNode();
-            node.setLeftNode(leftChild);
             if(lApproved>0){
-            leftChild.setAttribute("False clasee");
+            leftChild.setAttribute("True");
+            leftChild.setApproved(lApproved);
             }else{
-                leftChild.setAttribute("True clasee");
+                leftChild.setAttribute("False");
+                leftChild.setDennied(lDennied);
             }
-        }
-        if(checkSplit(rightreerowIndices)){
-            TreeNode rightChild=new TreeNode();
-            node.setRightNode(rightChild);
-            rightChild.setApproved(rApproved);
-           rightChild.setDennied(rDennied);
-            new BuildTree(datasets,rightreerowIndices,attributes,rightChild);
-        }else{
-            TreeNode rightChild=new TreeNode();
-            node.setLeftNode(rightChild);
-            if(rApproved>0){
-                rightChild.setAttribute("False clasee");
-            }else{
-                rightChild.setAttribute("True clasee");
-            }
+            leftChild.setClassLabel();
         }
 
+        TreeNode rightChild=new TreeNode();
+        node.setRightNode(rightChild);
+        rightChild.setParentNode(node);
+
+        if(checkSplit(rightreerowIndices)){
+            rightChild.setApproved(rApproved);
+           rightChild.setDennied(rDennied);
+            rightChild.setClassLabel();
+            new BuildTree(datasets,rightreerowIndices,attributes,rightChild);
+        }else{
+            if(rApproved>0){
+                rightChild.setAttribute("True");
+                rightChild.setApproved(rApproved);
+            }else{
+                rightChild.setAttribute("False");
+                rightChild.setDennied(rDennied);
+            }
+            rightChild.setClassLabel();
+        }
+        rightChild.setSibling(leftChild);
+        leftChild.setSibling(rightChild);
     }
 
     private boolean checkSplit(ArrayList<Integer> index){
