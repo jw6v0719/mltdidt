@@ -34,6 +34,8 @@ public class Main {
         System.out.println("############Verify Start########");
         Accuracy accu=new Accuracy(root,"gene_expression_test.csv");
 
+        System.out.println("############DotFile Writing########");
+        DotFile df=new DotFile(root,"origin.dot");
 
         System.out.println("#################Pruning start#############################");
         PostPrune pp=new PostPrune(root,true);
