@@ -1,77 +1,99 @@
+import java.util.ArrayList;
+
 public class PostPrune {
 
     private TreeNode root;
-    public PostPrune(TreeNode root){
+    private ArrayList<TreeNode> nodeOrder=new ArrayList<>();
+
+    public PostPrune(TreeNode root,boolean pe){
         this.root=root;
-        process();
+        postOrderNode(this.root);
+        if(pe) {
+            processPE();
+
+        }else{
+            process();
+        }
     }
     private void process(){
-        prune(root);
-    }
+        for(TreeNode node:nodeOrder){
+            prune(node);
+        }
 
+    }
+    private void processPE(){
+        for(TreeNode node:nodeOrder){
+            pessisPrune(node);
+        }
+
+    }
+    private void postOrderNode(TreeNode node){
+        //Maintain inner node's order with post ordered
+        if(node.getLeftNode()!=null){
+            postOrderNode(node.getLeftNode());
+        }
+        if(node.getRightNode()!=null){
+            postOrderNode(node.getRightNode());
+        }
+        if(node.getRightNode()!=null || node.getLeftNode()!=null){
+            nodeOrder.add(node);
+        }
+
+    }
     private void prune(TreeNode node){
-        //TreeNode sibling=node.getSibling();
-        if((node.getAttribute().equals("False")||node.getAttribute().contains("True")))
-                //&& (sibling.getAttribute().equals("False")||sibling.getAttribute().contains("True")))
-        {
-            if(checkAccuracy(node)){
-                eliminate(node.getParentNode());
-            }else{
-                if(node.getParentNode()!=null){
-                prune(node.getParentNode());
-                }
-            }
-
-        }else{
-            if(node.getLeftNode()!=null){
-                prune(node.getLeftNode());
-            }else if(node.getRightNode()!=null){
-                prune(node.getRightNode());
-            }
-        }
-    }
-
-    private boolean checkAccuracy(TreeNode node){
-        double parentPos=node.getParentNode().getApproved();
-        double parentNeg=node.getParentNode().getDennied();
-        double pos = node.getApproved();
-        double neg=node.getDennied();
-        double sibPos=node.getSibling().getApproved();
-        double sibNeg=node.getSibling().getDennied();
-
-        double correct=0;
-        double siblingCorrect=0;
-        double parCorrect=0;
-
-        boolean flag=false;
+        double childcorrect=childCorrect(node);
+        double childAccuracy=childcorrect/(node.getApproved()+node.getDennied());
+        double accuracy=0;
         if(node.getClassLabel().equals("True")){
-            correct=pos;
+            accuracy=node.getApproved()/(node.getApproved()+node.getDennied());
         }else{
-            correct=neg;
+            accuracy=node.getDennied()/(node.getApproved()+node.getDennied());
         }
-        if(node.getSibling().getClassLabel().equals("True")){
-            siblingCorrect=sibPos;
-        }else{
-            siblingCorrect=sibNeg;
+        if(accuracy>=childAccuracy){
+            eliminate(node);
         }
-        double curAccuracy=(correct+siblingCorrect)/(pos+neg+sibPos+sibNeg);
-        if(node.getParentNode().getClassLabel().equals("True")){
-            parCorrect=parentPos;
-        }else{
-            parCorrect=parentNeg;
-        }
-        double parentAccracy=parCorrect/(parentNeg+parentPos);
-        if(parentAccracy>curAccuracy){
-            flag=true;
-        }
-
-        return flag;
     }
+    private void pessisPrune(TreeNode node){
+        double childError=childError(node);
+        double error=pessimError(node);
+        if(error<=childError){
+            eliminate(node);
+        }
+    }
+    private double childCorrect(TreeNode node){
+        if(node.getLeftNode()==null&&node.getRightNode()==null){
+            if(node.getClassLabel().equals("True")){
+                return node.getApproved();
+            }else{
+                return node.getDennied();
+            }
+        }else{
+            return childCorrect(node.getRightNode())+childCorrect(node.getLeftNode());
+        }
 
+    }
     private void eliminate(TreeNode node){
         node.setRightNode(null);
         node.setLeftNode(null);
-        prune(node);
     }
+    private double childError(TreeNode node){
+        if(node.getLeftNode()==null&&node.getRightNode()==null){
+            return pessimError(node);
+        }else{
+            return childError(node.getRightNode())+childError(node.getLeftNode());
+        }
 
+    }
+    private double pessimError(TreeNode node){
+        double z=0.674;
+        double e=0;
+        double n=node.getApproved()+node.getDennied();
+        if(node.getApproved()>=node.getDennied()){
+            e=node.getApproved()/n;
+        }else{
+            e=node.getDennied()/n;
+        }
+        double p=(e+(Math.pow(z,2)/n)+(z*Math.sqrt((e/n)-(Math.pow(e,2)/n)+(Math.pow(z,2)/4*Math.pow(n,2)))))/(1+(Math.pow(z,2)/n));
+        return p;
+    }
 }

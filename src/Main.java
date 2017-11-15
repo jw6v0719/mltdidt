@@ -35,9 +35,9 @@ public class Main {
         Accuracy accu=new Accuracy(root,"gene_expression_test.csv");
 
 
-//        System.out.println("#################Pruning start#############################");
-//        PostPrune pp=new PostPrune(root);
-//        root.traverse(1);
-
+        System.out.println("#################Pruning start#############################");
+        PostPrune pp=new PostPrune(root,true);
+        root.traverse(1);
+        Accuracy accu2=new Accuracy(root,"gene_expression_test.csv");
     }
 }

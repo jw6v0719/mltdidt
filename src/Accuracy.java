@@ -39,7 +39,7 @@ public class Accuracy {
     }
 
     private String traverse(Double[] trainData,TreeNode node){
-        if(node.getAttribute().equals("True")||node.getAttribute().equals("False")){
+        if(node.getRightNode()==null&&node.getLeftNode()==null){
             return node.getClassLabel();
         }else if(trainData[node.getAttributeIndex()]<node.getCondition()){
             return traverse(trainData, node.getLeftNode());
