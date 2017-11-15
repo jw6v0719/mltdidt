@@ -33,17 +33,17 @@ public class DotFile {
     private void write(TreeNode node,int index,boolean left,boolean root){
         if(root){
             DotNode dn=new DotNode(node,"<",1);
-            fileContent.add(dn.getNodeInfo());
+            fileContent.add((dn.getNodeInfo()));
         }
         else {
             if(left){
                 DotNode dn=new DotNode(node,"<",index);
-                fileContent.add(dn.getNodeInfo());
-                fileContent.add(index/2+" -> "+index+leftLink);
+                fileContent.add((dn.getNodeInfo()));
+                fileContent.add((index/2+" -> "+index+leftLink));
             }else{
                 DotNode dn=new DotNode(node,">=",index);
-                fileContent.add(dn.getNodeInfo());
-                fileContent.add((index-1)/2+" -> "+index+rightLink);
+                fileContent.add((dn.getNodeInfo()));
+                fileContent.add(((index-1)/2+" -> "+index+rightLink));
             }
         }
 

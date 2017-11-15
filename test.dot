@@ -1,0 +1,5 @@
+digraph Tree {
+node [shape=box, style="filled", color="black"] ;
+0 [label=<APP &lt; 35<br/>samples = 701<br/>
+denied: 346, approved: 355<br/>class = approved>, fillcolor="#399de506"] ;
+}

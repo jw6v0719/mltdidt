@@ -29,7 +29,7 @@ public class DotNode {
         }
         String nodeInfo=index+
                 " [label=<"+attributes+
-                        " "+comparison+"; "+condition+"<br/><samples = "+samples+
+                        " "+comparison+"; "+condition+"<br/>samples = "+samples+
                         "<br/>denied: "+denied+
                         ", approved: "+approved+"<br/> class = "+classLabel+
                         ">, fillcolor=\""+colorCode+"\"] ;\n";
