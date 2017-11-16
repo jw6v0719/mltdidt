@@ -44,6 +44,7 @@ public class PostPrune {
         double childcorrect=childCorrect(node);
         double childAccuracy=childcorrect/(node.getApproved()+node.getDennied());
         double accuracy=0;
+        //accuracy=node.getApproved()/(node.getApproved()+node.getDennied());
         if(node.getClassLabel().equals("True")){
             accuracy=node.getApproved()/(node.getApproved()+node.getDennied());
         }else{
@@ -67,6 +68,7 @@ public class PostPrune {
             }else{
                 return node.getDennied();
             }
+//            return node.getApproved();
         }else{
             return childCorrect(node.getRightNode())+childCorrect(node.getLeftNode());
         }
@@ -89,9 +91,9 @@ public class PostPrune {
         double e=0;
         double n=node.getApproved()+node.getDennied();
         if(node.getApproved()>=node.getDennied()){
-            e=node.getApproved()/n;
-        }else{
             e=node.getDennied()/n;
+        }else{
+            e=node.getApproved()/n;
         }
         double p=(e+(Math.pow(z,2)/n)+(z*Math.sqrt((e/n)-(Math.pow(e,2)/n)+(Math.pow(z,2)/4*Math.pow(n,2)))))/(1+(Math.pow(z,2)/n));
         return p;

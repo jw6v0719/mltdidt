@@ -1,0 +1,87 @@
+"C:\Program Files\Java\jdk1.8.0_60\bin\java" "-javaagent:D:\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\lib\idea_rt.jar=63893:D:\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_60\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_60\jre\lib\rt.jar;D:\MachineLearning\out\production\MachineLearning" Main
+############Verify Start########
+################Build Tree by all training data#################
+Correct numbers: 293.0
+346
+0.846820809248555
+Accuracy rate: 0.846820809248555
+################Build Tree by 70% training data#################
+############ Verify Start ########
+############# Validate tree ##################
+############# Accuracy before pruning ##################
+Accuracy of expression test
+Correct numbers: 283.0
+346
+0.8179190751445087
+Accuracy rate: 0.8179190751445087
+Accuracy of replaced_with_average
+Correct numbers: 664.0
+1080
+0.6148148148148148
+Accuracy rate: 0.6148148148148148
+Accuracy of replaced_with_median
+Correct numbers: 664.0
+1080
+0.6148148148148148
+Accuracy rate: 0.6148148148148148
+Accuracy of replaced_with_random
+Correct numbers: 664.0
+1080
+0.6148148148148148
+Accuracy rate: 0.6148148148148148
+############DotFile Writing########
+################# Pruning start #############################
+############# Accuracy after heuristic error pruning ##################
+Accuracy of expression test
+Correct numbers: 283.0
+346
+0.8179190751445087
+Accuracy rate: 0.8179190751445087
+Accuracy of replaced_with_average
+Correct numbers: 635.0
+1080
+0.5879629629629629
+Accuracy rate: 0.5879629629629629
+Accuracy of replaced_with_median
+Correct numbers: 635.0
+1080
+0.5879629629629629
+Accuracy rate: 0.5879629629629629
+Accuracy of replaced_with_random
+Correct numbers: 635.0
+1080
+0.5879629629629629
+Accuracy rate: 0.5879629629629629
+############DotFile Writing########
+############ Verify Start ########
+############# Validate tree ##################
+############# Accuracy before pruning ##################
+Correct numbers: 283.0
+346
+0.8179190751445087
+Accuracy rate: 0.8179190751445087
+################# Pruning start #############################
+############# Accuracy after Pessimistic error pruning ##################
+Accuracy of expression test
+Correct numbers: 278.0
+346
+0.8034682080924855
+Accuracy rate: 0.8034682080924855
+Accuracy of replaced_with_average
+Correct numbers: 641.0
+1080
+0.5935185185185186
+Accuracy rate: 0.5935185185185186
+Accuracy of replaced_with_median
+Correct numbers: 641.0
+1080
+0.5935185185185186
+Accuracy rate: 0.5935185185185186
+Accuracy of replaced_with_random
+Correct numbers: 641.0
+1080
+0.5935185185185186
+Accuracy rate: 0.5935185185185186
+############DotFile Writing########
+
+Process finished with exit code 0

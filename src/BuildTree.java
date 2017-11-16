@@ -33,7 +33,7 @@ public class BuildTree {
         for(int i=0;i<attributes.length-1;i++){
                 calculateGain(i);
         }
-        System.out.println("Attribute: "+attributes[bestAttrinute]+" condition: "+meanValue);
+        //System.out.println("Attribute: "+attributes[bestAttrinute]+" condition: "+meanValue);
         split();
         node.setAttribute(attributes[bestAttrinute]);
         node.setCondition(meanValue);
@@ -44,24 +44,14 @@ public class BuildTree {
         node.setLeftNode(leftChild);
         leftChild.setParentNode(node);
         if(checkSplit(leftTreerowIndices)){
-            //leftChild.setApproved(lApproved);
-            //leftChild.setDennied(lDennied);
-            //leftChild.setClassLabel();
             new BuildTree(datasets,leftTreerowIndices,attributes, leftChild);
 
         }else{
             if(lApproved>0){
                 leftChild.setClassLabel("True");
-//            leftChild.setAttribute("True");
-//            leftChild.setApproved(lApproved);
             }else{
                 leftChild.setClassLabel("False");
-//                leftChild.setAttribute("False");
-//                leftChild.setDennied(lDennied);
             }
-//            leftChild.setClassLabel();
-//            leftChild.setApproved(0);
-//            leftChild.setDennied(0);
         }
 
         TreeNode rightChild=new TreeNode();
@@ -69,23 +59,13 @@ public class BuildTree {
         rightChild.setParentNode(node);
 
         if(checkSplit(rightreerowIndices)){
-            //rightChild.setApproved(rApproved);
-           ///rightChild.setDennied(rDennied);
-            //rightChild.setClassLabel();
             new BuildTree(datasets,rightreerowIndices,attributes,rightChild);
         }else{
             if(rApproved>0){
                 rightChild.setClassLabel("True");
-                //rightChild.setAttribute("True");
-
-                //rightChild.setApproved(rApproved);
             }else{
                 rightChild.setClassLabel("False");
-                //rightChild.setAttribute("False");
-                //rightChild.setDennied(rDennied);
             }
-            //rightChild.setClassLabel();
-
         }
         rightChild.setSibling(leftChild);
         leftChild.setSibling(rightChild);
@@ -166,9 +146,7 @@ public class BuildTree {
                         lDennied=leftNeg;
                         rApproved=totalPos-leftPos;
                         rDennied=totalNeg-leftNeg;
-//                        System.out.println("Best attribute: "+attributes[bestAttrinute]);
-//                        System.out.println("Left Approved: "+lApproved+" Left Dennied: "+lDennied);
-//                        System.out.println("Right Approved: "+rApproved+" RIght Dennied: "+rDennied);
+
 
                     }
                 }
@@ -194,12 +172,7 @@ public class BuildTree {
 
         /** Entropy for left(positive branch) */
         double result=0;
-//        double result = -(leftTotal / total)
-//                * ((leftPos / leftTotal) * log2(leftPos / leftTotal)
-//                + (leftNeg / leftTotal) * log2(leftNeg / leftTotal))
-//                /** Entropy for right(negative) branch */
-//                - (rightTotal / total) * ((rightPos / rightTotal) * log2(rightPos / rightTotal)
-//                + (rightNeg / rightTotal) * log2(rightNeg / rightTotal));
+
 
                 if(leftTotal==0){
                     result=- (rightTotal / total) * ((rightPos / rightTotal) * log2(rightPos / rightTotal)
@@ -217,11 +190,7 @@ public class BuildTree {
                             + (rightNeg / rightTotal) * log2(rightNeg / rightTotal));
                 }
 
-//        if (Double.isNaN(result)){
-//            System.out.println("Nan");
-//            return 0.1;
-//        } // if attribute can split the data
-//            System.out.println("Gain=" + generalEntropy + " - " + result + " = " + (generalEntropy - result));
+
         return generalEntropy - result;
     }
     private double log2(double number) {

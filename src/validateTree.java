@@ -29,7 +29,7 @@ public class validateTree {
             }else{
                 v=0;
             }
-            if(v==trainData[i][trainData[i].length-1]){
+            if(v==1){
                 leaf.approvedInc();
                 //leaf.setApproved(leaf.getApproved()+1);
             }else{
