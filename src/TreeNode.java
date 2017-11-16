@@ -30,10 +30,21 @@ public class TreeNode {
         return this.classLabel;
     }
 
+    public void setClassLabel(String label){
+        this.classLabel=label;
+    }
+
     public void setParentNode(TreeNode node){
         this.parentNode=node;
     }
 
+    public void approvedInc(){
+        this.Approved++;
+    }
+
+    public void deniedInc(){
+        this.Dennied++;
+    }
 
     public TreeNode getParentNode(){
         return this.parentNode;

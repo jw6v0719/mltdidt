@@ -44,20 +44,24 @@ public class BuildTree {
         node.setLeftNode(leftChild);
         leftChild.setParentNode(node);
         if(checkSplit(leftTreerowIndices)){
-            leftChild.setApproved(lApproved);
-            leftChild.setDennied(lDennied);
-            leftChild.setClassLabel();
+            //leftChild.setApproved(lApproved);
+            //leftChild.setDennied(lDennied);
+            //leftChild.setClassLabel();
             new BuildTree(datasets,leftTreerowIndices,attributes, leftChild);
 
         }else{
             if(lApproved>0){
-            leftChild.setAttribute("True");
-            leftChild.setApproved(lApproved);
+                leftChild.setClassLabel("True");
+//            leftChild.setAttribute("True");
+//            leftChild.setApproved(lApproved);
             }else{
-                leftChild.setAttribute("False");
-                leftChild.setDennied(lDennied);
+                leftChild.setClassLabel("False");
+//                leftChild.setAttribute("False");
+//                leftChild.setDennied(lDennied);
             }
-            leftChild.setClassLabel();
+//            leftChild.setClassLabel();
+//            leftChild.setApproved(0);
+//            leftChild.setDennied(0);
         }
 
         TreeNode rightChild=new TreeNode();
@@ -65,19 +69,23 @@ public class BuildTree {
         rightChild.setParentNode(node);
 
         if(checkSplit(rightreerowIndices)){
-            rightChild.setApproved(rApproved);
-           rightChild.setDennied(rDennied);
-            rightChild.setClassLabel();
+            //rightChild.setApproved(rApproved);
+           ///rightChild.setDennied(rDennied);
+            //rightChild.setClassLabel();
             new BuildTree(datasets,rightreerowIndices,attributes,rightChild);
         }else{
             if(rApproved>0){
-                rightChild.setAttribute("True");
-                rightChild.setApproved(rApproved);
+                rightChild.setClassLabel("True");
+                //rightChild.setAttribute("True");
+
+                //rightChild.setApproved(rApproved);
             }else{
-                rightChild.setAttribute("False");
-                rightChild.setDennied(rDennied);
+                rightChild.setClassLabel("False");
+                //rightChild.setAttribute("False");
+                //rightChild.setDennied(rDennied);
             }
-            rightChild.setClassLabel();
+            //rightChild.setClassLabel();
+
         }
         rightChild.setSibling(leftChild);
         leftChild.setSibling(rightChild);
